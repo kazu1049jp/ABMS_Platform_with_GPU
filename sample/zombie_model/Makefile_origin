@@ -1,0 +1,49 @@
+#This is the Makefile of infection model (double).
+CC = nvcc
+SOURCE = main.cu human.cu zombie.cu ../../world/worldCreator.cu ../../world/worldDefinition.cpp ../../math/random.cu ../../math/math.cu ../../agent/output.cpp ../../agent/AbstractAgent.cu ../../agent/Turtle.cu  ../../observer/observer.cu
+#OBJ = main.o output.o human.o worldCreator.o worldDefinition.o random.o 
+ARCH = -arch=sm_20
+DEVIDE = -rdc=true
+PROGRAM = infect
+OPTION  = -g
+
+all: $(PROGRAM)
+
+$(PROGRAM): $(OBJ)
+	$(CC) $(SOURCE) -o $(PROGRAM) $(ARCH) $(DEVIDE) $(OPTION)
+
+#main.o: main.cu
+#	$(CC) -c main.cu
+
+#worldDefinition.o: ../../world/worldDefinition.cpp
+#	$(CC) -c ../../world/worldDefinition.cpp
+
+#worldCreator.o: ../../world/worldCreator.cu
+#	$(CC) -c ../../world/worldCreator.cu $(ARCH)
+
+#random.o: ../../math/random.cu
+#	$(CC) -c ../../math/random.cu
+
+#human.o: human.cu
+#	$(CC) -c human.cu $(ARCH) $(DEVIDE)
+
+#output.o: ../../agent/output.cpp
+#	$(CC) -c ../../agent/output.cpp
+
+#AbstractAgent.o: ../../agent/AbstractAgent.cu
+#	$(CC) -c ../../agent/AbstractAgent.cu
+
+#Turtle.o: ../../agent/Turtle.cu
+#	$(CC) -c ../../agent/Turtle.cu
+
+#observer.o: ../../observer/observer.cu
+#	$(CC) -c ../../observer/observer.cu
+
+#math.o: ../../math/math.cu
+#	$(CC) -c ../../math/math.cu $(ARCH) $(DEVIDE)
+
+run: $(PROGRAM)
+	./$(PROGRAM)
+
+clean:
+	rm -f *.o *~ $(PROGRAM)
